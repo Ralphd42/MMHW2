@@ -1,0 +1,75 @@
+ /*
+        
+        
+        
+        System.out.println(System.getProperty("java.library.path"));
+        //System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        final Mat src = imread("/home/ralph/development/fall2019Classes/mm/HW2/target.jpg");
+        display(src, "Input");
+         System.out.println("ch   " + src.channels());
+         System.out.println("rows " +src.rows());
+         System.out.println("Cols " +src.cols());
+         UByteIndexer idbl =src.createIndexer();
+         //DoubleIndexer idbl =src.createIndexer();
+         for (int i =0;i<100;i++)
+         {
+             for(int j =0 ;j<100;j++){
+             idbl.put( i,j,0,(byte)255);
+             }
+         }
+         
+         for (int i =100;i<200;i++)
+         {
+             for(int j =0 ;j<100;j++){
+             idbl.put( i,j,1,(byte)255);
+             }
+         }
+         for (int i =200;i<300;i++)
+         {
+             for(int j =0 ;j<100;j++){
+             idbl.put( i,j,2,(byte)255);
+             idbl.put( i,j,1,(byte)255);
+             idbl.put( i,j,0,(byte)255);
+             }
+         }
+         for (int i =300;i<400;i++)
+         {
+             for(int j =0 ;j<1000;j++){
+             idbl.put( i,j,2,(byte)0);
+             idbl.put( i,j,1,(byte)0);
+             //idbl.put( i,j,0,(byte)255);
+             }
+         }
+         for (int i =400;i<500;i++)
+         {
+             for(int j =0 ;j<1000;j++){
+             idbl.put( i,j,2,(byte)0);
+             //idbl.put( i,j,1,(byte)0);
+             idbl.put( i,j,0,(byte)0);
+             }
+         }
+         
+         
+         
+         
+        // Apply Laplacian filter
+        Mat dest = new Mat();
+        display(src, "MEssesed with");
+        //display(oMat2,"");
+       // cvtColor(src, dest, Imgproc.COLOR_RGB2GRAY); 
+        //display(dest,"11111");
+        //Core.dct(src, dest);
+        //dest.resize(CV_32F);
+       // if ((dest.cols() & 1) != 0) {
+        //    copyMakeBorder(dest, dest, 0, 0, 0, 1, BORDER_CONSTANT, Scalar.all(0));
+        //}
+        //if ((dest.rows() & 1) != 0) {
+        //    copyMakeBorder(dest, dest, 0, 1, 0, 0, BORDER_CONSTANT, Scalar.all(0));
+        //}
+        //dest.convertTo(dest, CV_32F);
+        /*org.bytedeco.opencv.global.opencv_core.*/
+       // dct(dest, dest, BORDER_DEFAULT);
+        //display(dest,"dct");
+        //Laplacian(src, dest, src.depth(), 1, 3, 0, BORDER_DEFAULT);
+        //display(dest, "IMAGE");
+        */

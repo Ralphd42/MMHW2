@@ -11,6 +11,8 @@ import javax.swing.WindowConstants;
 import org.bytedeco.javacpp.indexer.UByteIndexer;
 import org.bytedeco.javacv.CanvasFrame;
 import org.bytedeco.javacv.Frame;
+import org.bytedeco.javacv.FrameGrabber;
+import org.bytedeco.javacv.FrameRecorder;
 import org.bytedeco.javacv.Java2DFrameConverter;
 import org.bytedeco.javacv.OpenCVFrameConverter;
 import static org.bytedeco.opencv.global.opencv_imgcodecs.imread;
@@ -27,14 +29,20 @@ public class HW2P2 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FrameRecorder.Exception {
         // TODO code application logic here
         String imgLocation ="/home/ralph/development/fall2019Classes/mm/HW2/test.jpg";
         VideoLoader vl = new VideoLoader();
-try{        vl.KeyFrame("/home/ralph/development/fall2019Classes/mm/HW2/PKA.mp4");
-}catch(Exception Exp){}    
+try{        vl.KeyFrame("/home/ralph/development/fall2019Classes/mm/HW2/PKA.mp4",100);
+}catch(  Exception Exp){
+
+    System.out.println(Exp.toString());
+
+
+
+}    
         
-        if(true){
+        if(false){
         Mat infile =imread(imgLocation);
         HistFunctions hs = new HistFunctions();
         Mat hist = hs.getHistMat3(infile);
@@ -44,7 +52,7 @@ try{        vl.KeyFrame("/home/ralph/development/fall2019Classes/mm/HW2/PKA.mp4"
        // calcHist(infile  );
          
     }
-    static void display(Mat image, String caption) {
+   public  static void display(Mat image, String caption) {
         // Create image window named "My Image".
         final CanvasFrame canvas = new CanvasFrame(caption, 1.0);
 
@@ -55,7 +63,7 @@ try{        vl.KeyFrame("/home/ralph/development/fall2019Classes/mm/HW2/PKA.mp4"
         final OpenCVFrameConverter converter = new OpenCVFrameConverter.ToMat();
         // Show image on window.
         Frame f =converter.convert(image);
-         
+         canvas.setCanvasSize(512, 512);
         canvas.showImage(converter.convert(image));
     }
     

@@ -108,6 +108,24 @@ public class HistFunctions {
         return hist; }
     
     
+    public static Mat getHistMatGrey(Mat image){ 
+        //int[] hist_size = {50,60};
+        cvtColor(image, image, Imgproc.COLOR_RGB2GRAY); //COLOR_BGR2HSV COLOR_RGB2GRAY
+        IntPointer sz=new IntPointer(new int[]{256});
+        IntPointer chn=new IntPointer(new int[]{0});// greyscale only need one channel
+         
+         
+         
+        final float[] ranges = {0f,256f}; 
+        PointerPointer<FloatPointer> range_pointer=new PointerPointer<>(ranges); 
+        Mat hist=new Mat(); 
+        hist.rows(image.rows()).cols(image.cols()); 
+        Mat mask=new Mat(); 
+        mask.rows(image.rows()).cols(image.cols()); 
+        opencv_imgproc.calcHist(image, 1, chn, mask, hist, 1, sz, range_pointer,true,false); 
+        opencv_core.normalize(hist, hist, 0, 1, opencv_core.NORM_MINMAX, -1, new Mat()); 
+        return hist; }
+    
     
     
     

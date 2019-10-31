@@ -8,6 +8,7 @@ package com.mycompany.mmhw2p2;
 import org.bytedeco.javacpp.FloatPointer;
 import org.bytedeco.javacpp.IntPointer;
 import org.bytedeco.javacpp.PointerPointer;
+import org.bytedeco.javacpp.indexer.FloatIndexer;
 import org.bytedeco.opencv.global.opencv_core;
 import org.bytedeco.opencv.global.opencv_imgcodecs;
 import org.bytedeco.opencv.global.opencv_imgproc;
@@ -129,10 +130,59 @@ public class HistFunctions {
     
     
     
+   /**
+    * calculates intersection of two greyscale normalized histograms
+    * @param h1 normalized greyscale histogram 1
+    * @param h2 normalized greyscale histogram 2
+    * @return the intersection
+    */
+   public static double HistIntersectDistance(Mat h1, Mat h2)
+    {
+        double retval =0.0;
+        FloatIndexer h1Indexer = h1.createIndexer();
+        FloatIndexer h2Indexer = h2.createIndexer();
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        System.out.println(h1.rows());
+        System.out.println(h1.cols());
+        double sum =0.0;
+        for( int cnt =0; cnt <h1.rows();cnt++)
+        {
+            sum = min(h1Indexer.get(cnt),h2Indexer.get(cnt));
+        }
+        return retval;
+    } 
+    public static double min(double m1, double m2)
+    {
+        double retval =m2;
+        if(m1<m2)
+        {
+            retval =m1;
+        }    
+        return retval;
+    }
+    public static double EuclidHistDist( Mat h1, Mat h2)
+    {
+        double retval =0.0;
+        FloatIndexer h1Indexer = h1.createIndexer();
+        FloatIndexer h2Indexer = h2.createIndexer();
+        double sum =0.0;
+        for( int cnt =0; cnt <h1.rows();cnt++)
+        {
+            sum += Math.pow((h1Indexer.get(cnt)-h2Indexer.get(cnt)),2.0);
+        }
+        
+        retval =Math.sqrt(sum);
+        return retval;
+    }
+    
     
     
     
 }
+
+
+
+
 
     
     

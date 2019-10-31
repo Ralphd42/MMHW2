@@ -16,7 +16,9 @@ import org.bytedeco.javacv.FrameRecorder;
 import org.bytedeco.javacv.Java2DFrameConverter;
 import org.bytedeco.javacv.OpenCVFrameConverter;
 import static org.bytedeco.opencv.global.opencv_imgcodecs.imread;
+import static org.bytedeco.opencv.global.opencv_imgproc.CV_COMP_CHISQR;
 import static org.bytedeco.opencv.global.opencv_imgproc.calcHist;
+import static org.bytedeco.opencv.global.opencv_imgproc.compareHist;
 import org.bytedeco.opencv.opencv_core.Mat;
 
 /**
@@ -25,27 +27,52 @@ import org.bytedeco.opencv.opencv_core.Mat;
  * @author ralph
  */
 public class HW2P2 {
-
+    public static void ShowUsage(String[] args)
+    {
+        if( (args.length<1) ||
+            (args[0].compareTo("K")!=0 && args[0].compareTo("H")!=0)    
+                
+                
+                
+                ){
+                System.err.print("Usage <K> <threshehold> <frameRate> <inputFile> <Outputfile>");
+        System.exit(1);}
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws FrameRecorder.Exception {
-        // TODO code application logic here
-        String imgLocation ="/home/ralph/development/fall2019Classes/mm/HW2/test.jpg";
-        VideoLoader vl = new VideoLoader();
-try{        vl.KeyFrame("/home/ralph/development/fall2019Classes/mm/HW2/PKA.mp4",100);
-}catch(  Exception Exp){
-
-    System.out.println(Exp.toString());
-
-
-
-}    
+        ShowUsage(args);
         
-        if(false){
-        Mat infile =imread(imgLocation);
-        HistFunctions hs = new HistFunctions();
-        Mat hist = hs.getHistMat3(infile);
+        
+        
+        
+        
+        if(args[0]=="K")
+        {
+            
+            VideoLoader vl = new VideoLoader();
+            try
+            {        
+                vl.KeyFrame("/home/ralph/development/fall2019Classes/mm/HW2/PKA.mp4",3);
+            }catch(  Exception Exp)
+            {
+                System.out.println(Exp.toString());
+            }
+        
+        }
+        
+        
+        // TODO code application logic here
+            
+        
+        if(args[0].compareTo("H")==0){
+            String imgLocation ="/home/ralph/development/fall2019Classes/mm/HW2/test.jpg";
+            Mat infile =imread(imgLocation);
+            HistFunctions hs = new HistFunctions();
+            Mat hist = HistFunctions.getHistMatGrey(infile);
+            HistFunctions.HistIntersectDistance(hist,hist);
+            double histdiff =compareHist(hist,hist,CV_COMP_CHISQR);
         display(hist, "CHIST");
         }
         

@@ -42,42 +42,15 @@ public class HW2P2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws FrameRecorder.Exception {
-        ShowUsage(args);
-        
-        
-        
-        
-        
-        if(args[0]=="K")
         {
-            
-            VideoLoader vl = new VideoLoader();
-            try
-            {        
-                vl.KeyFrame("/home/ralph/development/fall2019Classes/mm/HW2/PKA.mp4",3);
-            }catch(  Exception Exp)
-            {
-                System.out.println(Exp.toString());
+            java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Q2Q3().setVisible(true);
             }
+        });
         
-        }
         
-        
-        // TODO code application logic here
-            
-        
-        if(args[0].compareTo("H")==0){
-            String imgLocation ="/home/ralph/development/fall2019Classes/mm/HW2/test.jpg";
-            Mat infile =imread(imgLocation);
-            HistFunctions hs = new HistFunctions();
-            Mat hist = HistFunctions.getHistMatGrey(infile);
-            HistFunctions.HistIntersectDistance(hist,hist);
-            double histdiff =compareHist(hist,hist,CV_COMP_CHISQR);
-        display(hist, "CHIST");
-        }
-        
-       // calcHist(infile  );
-         
+        } 
     }
    public  static void display(Mat image, String caption) {
         // Create image window named "My Image".

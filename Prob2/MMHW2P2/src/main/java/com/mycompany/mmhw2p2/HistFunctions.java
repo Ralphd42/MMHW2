@@ -141,14 +141,15 @@ public class HistFunctions {
         double retval =0.0;
         FloatIndexer h1Indexer = h1.createIndexer();
         FloatIndexer h2Indexer = h2.createIndexer();
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+         
         System.out.println(h1.rows());
         System.out.println(h1.cols());
         double sum =0.0;
         for( int cnt =0; cnt <h1.rows();cnt++)
         {
-            sum = min(h1Indexer.get(cnt),h2Indexer.get(cnt));
+            sum += min(h1Indexer.get(cnt),h2Indexer.get(cnt));
         }
+        retval = sum;
         return retval;
     } 
     public static double min(double m1, double m2)

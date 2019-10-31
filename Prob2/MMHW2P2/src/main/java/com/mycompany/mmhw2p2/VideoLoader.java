@@ -25,28 +25,10 @@ import org.bytedeco.opencv.opencv_core.Mat;
  * @author ralph
  */
 public class VideoLoader {
-    public Mat KeyFrame(String fname) throws FrameGrabber.Exception
+    public int KeyFrame(String fname, int threshehold, int FrameRate) throws FrameGrabber.Exception, FrameRecorder.Exception
     {
-        Mat mret= new Mat();
-        IplImage image;
-        FFmpegFrameGrabber grb = new FFmpegFrameGrabber(fname);
-        grb.start();
-        Frame fr;
-        while( ((fr=grb.grabKeyFrame())!=null)){
-       // Frame fr =grb.grab();
-        //fr =grb.grabKeyFrame();
-        final CanvasFrame canvas = new CanvasFrame("AAAAAAAA", 1.0);
-         ToMat mt = new ToMat();
-          mret =mt.convert(fr);// ToMat.\\\(fr);//convertToMat(fr);//convert(fr);//    convertToMat(fr);//(Mat)fr.opaque;
-        canvas.showImage(fr);
-        AVFrame avfr;// = new AVFrame();
-        }
-        return mret;
-    }
-    public Mat KeyFrame(String fname, int threshehold) throws FrameGrabber.Exception, FrameRecorder.Exception
-    {
-        FFmpegFrameRecorder outRec = new FFmpegFrameRecorder("/home/ralph/development/fall2019Classes/mm/HW2/OUTPUT_TST.mp4",640,720);
-        outRec.setFrameRate(10);
+        FFmpegFrameRecorder outRec = new FFmpegFrameRecorder("/home/ralph/development/fall2019Classes/mm/HW2/HW2P3.mp4",640,720);
+        outRec.setFrameRate(FrameRate);
         outRec.setFormat("mp4");
         outRec.setVideoCodec(AV_CODEC_ID_MPEG4);
         int cnt =0;
@@ -86,20 +68,12 @@ public class VideoLoader {
              }
              else
              {
-                // System.out.printf("\nNULL %b",fr.keyFrame );
+                //av frame do nothing now
              }
         }
-       // Frame fr =grb.grab();
-        //fr =grb.grabKeyFrame();
-        //final CanvasFrame canvas = new CanvasFrame("AAAAAAAA", 1.0);
-         //ToMat mt = new ToMat();
-         // mret =mt.convert(fr);// ToMat.\\\(fr);//convertToMat(fr);//convert(fr);//    convertToMat(fr);//(Mat)fr.opaque;
-        //canvas.showImage(fr);
-        //AVFrame avfr;// = new AVFrame();
-            
         }
         outRec.stop();
-        return mret;
+        return cnt;
     }
     
     
